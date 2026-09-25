@@ -16,7 +16,7 @@ Esta pasta contém uma seleção das execuções congeladas usadas no relatório
 | `evaluations/red-team-v5-summary.json` | Revisão consolidada dos objetivos de segurança e utilidade dos ataques. |
 | `aws-v6/lambda-kb-smoke.json` | Resultado sanitizado da chamada direta Lambda → Knowledge Base. |
 | `aws-v6/gateway-v6-smoke-summary.json` | Resumo dos quatro diálogos de integração executados pelo Harness v6. |
-| `demo/demo-streamlit.mp4` | Gravação exploratória da interface Streamlit; não substitui os lotes de avaliação. |
+| `demo/demo-streamlit.mp4` | Cópia da gravação exploratória; [assistir ao anexo no navegador](https://github.com/user-attachments/assets/d04ef1bc-358c-4d11-b99a-23e92d988be1). Não substitui os lotes de avaliação. |
 | `demo/preview-streamlit.png` | Imagem de abertura do vídeo no README principal. |
 | `aws-console/` | Capturas manuais do Harness, ferramenta, memória, KB, S3, S3 Vectors e Lambdas, com explicação dos limites de cada imagem. |
 
