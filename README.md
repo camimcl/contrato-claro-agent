@@ -322,6 +322,8 @@ Depois de salvar as evidências, revise manualmente na sua conta o Harness, a me
 
 O ContratoClaro está adequado como prova de conceito educacional: possui execução reproduzível, evidências, testes, controles de custo e uma campanha de avaliação ampla. **A versão atual não deve analisar contratos reais em produção.** Antes disso, seriam necessários isolamento multiusuário com autorização por documento, criptografia e política de retenção, monitoramento contínuo, testes com corpus jurídico representativo, proteção adicional contra injeção indireta, gestão formal de segredos, metas de disponibilidade e revisão humana obrigatória. A saída deve continuar sendo tratada como apoio à leitura, nunca como aconselhamento jurídico automático.
 
-## Considerações finais
+## Considerações finais e agradecimentos
 
-O projeto mostra o ciclo completo de um agente: construção, RAG, deploy, avaliação, ataque, correção e comparação com um baseline. O principal resultado não é apenas a melhora das notas, mas a capacidade de rastrear quais trechos sustentaram cada resposta e quais limitações ainda impedem o uso com dados reais.
+O projeto mostra o ciclo completo de um agente: construção, RAG, deploy, avaliação, ataque, correção e comparação com um baseline. O principal resultado não é apenas a melhora das notas, mas a capacidade de rastrear quais trechos sustentaram cada resposta e quais limitações ainda impedem o uso com dados reais. No mais, gostaria de agradecer ao João, Fernanda, Kanan e Andressa pois apresentaram questionamentos pertinentes durante o desenvolvimento do projeto que me ajudaram e me guiaram muito nas adversidades que tive. 
+
+
