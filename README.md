@@ -21,9 +21,9 @@ O ContratoClaro identifica obrigações, pagamentos, prazos, multas, rescisão e
 
 ## Demonstração em vídeo
 
-[![Demonstração do ContratoClaro no Streamlit: resposta com evidências](evidence/demo/preview-streamlit.png)](evidence/demo/demo-streamlit.mp4)
+[![Assistir à demonstração do ContratoClaro no Streamlit](evidence/demo/preview-streamlit.png)](https://github.com/user-attachments/assets/d04ef1bc-358c-4d11-b99a-23e92d988be1)
 
-**[Abrir ou baixar a demonstração em MP4 — 3min29s](evidence/demo/demo-streamlit.mp4)**
+**[Assistir à demonstração — 3min29s](https://github.com/user-attachments/assets/d04ef1bc-358c-4d11-b99a-23e92d988be1)** · [Baixar a cópia MP4 do repositório](evidence/demo/demo-streamlit.mp4)
 
 A gravação mostra a interface Streamlit com contratos fictícios, perguntas de continuação, referências aos documentos e situações que exigem corrigir uma premissa ou reconhecer a falta de evidência. A busca dos arquivos enviados à interface acontece no cliente Python; este vídeo não representa o fluxo Gateway + Lambda da extensão v6.
 
