@@ -14,9 +14,12 @@ Esta pasta contém uma seleção das execuções congeladas usadas no relatório
 | `evaluations/custom-evaluator-v5.jsonl` | Resultado final do avaliador customizado nos 15 casos. |
 | `evaluations/red-team-baseline-summary.json` | Revisão dos 15 ataques contra a baseline, incluindo as três falhas confirmadas. |
 | `evaluations/red-team-v5-summary.json` | Revisão consolidada dos objetivos de segurança e utilidade dos ataques. |
+| `demo/demo-streamlit.mp4` | Gravação exploratória da interface Streamlit; não substitui os lotes de avaliação. |
+| `demo/preview-streamlit.png` | Imagem de abertura do vídeo no README principal. |
+| `aws-console/` | Capturas manuais do Harness, ferramenta, memória, KB, S3, S3 Vectors e Lambdas, com explicação dos limites de cada imagem. |
 
 ## Proveniência e privacidade
 
-Os arquivos foram copiados dos artefatos locais preservados ao final das execuções. IDs de conta AWS, ARNs específicos, IDs de sessão, traces, requisições e caminhos do computador foram removidos ou substituídos por marcadores. Nos dois JSONL do avaliador customizado, a explicação textual retornada com codificação danificada também foi omitida; `case_id`, estado, rótulo e nota permanecem iguais aos registros originais. A sanitização não altera perguntas, respostas, notas, critérios nem referências contratuais.
+Os registros de avaliação foram copiados dos artefatos locais preservados ao final das execuções. IDs de conta AWS, ARNs específicos, IDs de sessão, traces, requisições e caminhos do computador foram removidos ou substituídos por marcadores. Nos dois JSONL do avaliador customizado, a explicação textual retornada com codificação danificada também foi omitida; `case_id`, estado, rótulo e nota permanecem iguais aos registros originais. A sanitização não altera perguntas, respostas, notas, critérios nem referências contratuais. O vídeo foi convertido de WebM para MP4 para facilitar a reprodução no GitHub.
 
 As execuções podem variar quando repetidas porque o agente e alguns avaliadores usam modelos generativos. Os arquivos desta pasta representam os lotes congelados citados em `docs/RESULTADOS.md`; não constituem uma nova execução.
