@@ -1,0 +1,36 @@
+name: testes locais
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  pytest-e-ruff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências locais
+        run: python -m pip install -e ".[dev]"
+
+      - name: Executar testes sem AWS
+        env:
+          PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+        run: python -m pytest tests -q -p no:cacheprovider
+
+      - name: Verificar estilo
+        run: python -m ruff check src infra evaluations tests app.py
