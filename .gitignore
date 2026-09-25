@@ -26,6 +26,10 @@ docs/*
 !docs/RESULTADOS.md
 !docs/RED_TEAM.md
 !docs/SESSAO-EXPLORATORIA.md
+!docs/APRESENTACAO.md
+!docs/assets/
+docs/assets/*
+!docs/assets/comparacao-baseline-hardened.png
 !docs/Relatorio_Final_ContratoClaro.docx
 data/golden_behavior_pilot.json
 data/golden_multiturn_retest.json
