@@ -1,0 +1,22 @@
+# Evidências publicadas
+
+Esta pasta contém uma seleção das execuções congeladas usadas no relatório final. Os contratos são sintéticos e os arquivos permitem conferir as perguntas, respostas, referências recuperadas, chamadas da ferramenta e resultados das avaliações sem repetir chamadas pagas à AWS.
+
+## Conteúdo
+
+| Caminho | Conteúdo |
+|---|---|
+| `agent-runs/v5-golden-responses.jsonl` | 15 respostas da versão v5 para o Golden Dataset, incluindo contexto recuperado e checagens estruturais. |
+| `agent-runs/v5-red-team-responses.jsonl` | 15 respostas da campanha final de Red Team. |
+| `evaluations/deepeval-baseline-vs-v5-summary.json` | Comparação do baseline com a v5 usando o mesmo juiz e somente notas válidas. |
+| `evaluations/native-baseline-vs-v5-summary.json` | Comparação dos avaliadores nativos Faithfulness e Helpfulness. |
+| `evaluations/custom-evaluator-baseline.jsonl` | Resultado sanitizado do avaliador customizado nos 14 casos baseline com resposta completa. |
+| `evaluations/custom-evaluator-v5.jsonl` | Resultado final do avaliador customizado nos 15 casos. |
+| `evaluations/red-team-baseline-summary.json` | Revisão dos 15 ataques contra a baseline, incluindo as três falhas confirmadas. |
+| `evaluations/red-team-v5-summary.json` | Revisão consolidada dos objetivos de segurança e utilidade dos ataques. |
+
+## Proveniência e privacidade
+
+Os arquivos foram copiados dos artefatos locais preservados ao final das execuções. IDs de conta AWS, ARNs específicos, IDs de sessão, traces, requisições e caminhos do computador foram removidos ou substituídos por marcadores. Nos dois JSONL do avaliador customizado, a explicação textual retornada com codificação danificada também foi omitida; `case_id`, estado, rótulo e nota permanecem iguais aos registros originais. A sanitização não altera perguntas, respostas, notas, critérios nem referências contratuais.
+
+As execuções podem variar quando repetidas porque o agente e alguns avaliadores usam modelos generativos. Os arquivos desta pasta representam os lotes congelados citados em `docs/RESULTADOS.md`; não constituem uma nova execução.

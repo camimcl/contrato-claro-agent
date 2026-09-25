@@ -1,0 +1,15 @@
+{"case_id": "ga-01", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "ga-02", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "ga-03", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gd-01", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gd-02", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gd-03", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gf-01", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gf-02", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gf-03", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gm-01", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}, {"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gm-02", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}, {"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "gm-03", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}, {"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "go-01", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "go-02", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}
+{"case_id": "go-03", "status": "completed", "results": [{"evaluatorName": "ContratoClaroConformidade", "value": 1.0, "label": "PASS"}]}

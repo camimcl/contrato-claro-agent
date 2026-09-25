@@ -1,0 +1,61 @@
+{
+  "baseline_input": "baseline-kb-harness.jsonl",
+  "final_input": "final-mitigation-v5-hardened.jsonl",
+  "baseline_evaluations": "native-eval-ondemand-baseline-kb.jsonl",
+  "final_evaluations": "native-eval-ondemand-final-mitigation-v5.jsonl",
+  "telemetry_source": "reconstructed_from_harness_jsonl",
+  "comparison_unit": "same case and turn (trace ID), 17 paired traces from 14 baseline cases",
+  "missing_baseline_case": "gf-01: original Harness run ended in error and has no complete answer to evaluate",
+  "comparisons": [
+    {
+      "evaluator": "Builtin.Faithfulness",
+      "baseline_calls": 14,
+      "final_calls": 15,
+      "baseline_traces": 17,
+      "final_traces": 18,
+      "paired_traces": 17,
+      "baseline_average": 0.9118,
+      "final_average_paired": 1.0,
+      "delta_paired": 0.0882,
+      "final_average_all": 1.0,
+      "baseline_labels": {
+        "Completely Yes": 13,
+        "Generally Yes": 3,
+        "Not Generally": 1
+      },
+      "final_labels": {
+        "Completely Yes": 18
+      }
+    },
+    {
+      "evaluator": "Builtin.Helpfulness",
+      "baseline_calls": 14,
+      "final_calls": 15,
+      "baseline_traces": 17,
+      "final_traces": 18,
+      "paired_traces": 17,
+      "baseline_average": 0.6653,
+      "final_average_paired": 0.7718,
+      "delta_paired": 0.1065,
+      "final_average_all": 0.775,
+      "baseline_labels": {
+        "Above And Beyond": 1,
+        "Neutral/Mixed": 1,
+        "Somewhat Helpful": 3,
+        "Somewhat Unhelpful": 3,
+        "Very Helpful": 8,
+        "Very Unhelpful": 1
+      },
+      "final_labels": {
+        "Above And Beyond": 3,
+        "Somewhat Unhelpful": 3,
+        "Very Helpful": 12
+      }
+    }
+  ],
+  "limitations": [
+    "Generic OpenTelemetry spans are reconstructed from recorded Harness interactions; they are not automatic AgentCore Runtime traces.",
+    "Faithfulness and Helpfulness are LLM judges; repeat scores can vary.",
+    "Scores are not assigned to the missing baseline gf-01 case."
+  ]
+}
