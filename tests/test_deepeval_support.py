@@ -1,8 +1,5 @@
-import pytest
-
-pytest.importorskip("deepeval")
-BaseModel = pytest.importorskip("pydantic").BaseModel
 from deepeval.test_case import SingleTurnParams
+from pydantic import BaseModel
 
 from contratoclaro.deepeval_support import (
     BedrockConverseJudge,
