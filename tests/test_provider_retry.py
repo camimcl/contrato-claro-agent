@@ -24,8 +24,8 @@ class Ledger:
 
 
 def test_retries_one_connect_timeout_before_succeeding(monkeypatch):
+    monkeypatch.setattr("contratoclaro.provider.boto3.Session", lambda **_kwargs: Session())
     client = MantleClient(ledger=Ledger())
-    client.session = Session()
     attempts = []
 
     def post(*_args, **_kwargs):
