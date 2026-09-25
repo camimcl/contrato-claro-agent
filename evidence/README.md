@@ -14,6 +14,8 @@ Esta pasta contém uma seleção das execuções congeladas usadas no relatório
 | `evaluations/custom-evaluator-v5.jsonl` | Resultado final do avaliador customizado nos 15 casos. |
 | `evaluations/red-team-baseline-summary.json` | Revisão dos 15 ataques contra a baseline, incluindo as três falhas confirmadas. |
 | `evaluations/red-team-v5-summary.json` | Revisão consolidada dos objetivos de segurança e utilidade dos ataques. |
+| `aws-v6/lambda-kb-smoke.json` | Resultado sanitizado da chamada direta Lambda → Knowledge Base. |
+| `aws-v6/gateway-v6-smoke-summary.json` | Resumo dos quatro diálogos de integração executados pelo Harness v6. |
 
 ## Proveniência e privacidade
 

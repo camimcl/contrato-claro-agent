@@ -21,6 +21,12 @@ O Harness orquestra o modelo e seleciona a função inline; `src/contratoclaro/h
 
 Na integração AWS, os três contratos e seus sidecars de metadados ficam versionados em `data/contracts/` para upload manual. O S3 guarda os arquivos; a Knowledge Base divide o conteúdo e produz embeddings Titan V2; o S3 Vectors indexa os vetores. `src/contratoclaro/kb.py` chama `Retrieve` com filtros `scope_id` e `contract_id`, depois confere novamente os metadados devolvidos. O filtro é uma proteção de aplicação no piloto com um operador, **não** isolamento multiusuário suficiente para contratos reais: permissões diretas de `Retrieve` exigem controle IAM e segregação adicional.
 
+## Extensão v6: ferramenta executada na AWS
+
+A v6 mantém os componentes avaliados e acrescenta um caminho alternativo: Harness → AgentCore Gateway → Lambda → Knowledge Base. O Gateway usa autenticação `AWS_IAM`; a Lambda aceita apenas `query` e `document_ids`, aplica um catálogo fixo dos três contratos fictícios e valida novamente os metadados recebidos da KB. `src/contratoclaro/gateway_harness.py` apenas inicia a conversa e lê a resposta, pois a ferramenta deixa de ser concluída pelo cliente local. O desenho, a preparação manual e o smoke estão detalhados em `docs/GATEWAY-V6.md`.
+
+Essa extensão não substitui a arquitetura v5 nos resultados oficiais. Ela foi verificada com uma chamada direta à Lambda e quatro diálogos pelo Harness, sem repetir os 15 casos Golden, o DeepEval ou toda a campanha de Red Team.
+
 Há duas variantes de instruções em `src/contratoclaro/agent.py`: baseline e hardened. A versão corrigida trata conteúdo recuperado como dado não confiável, exige evidência contratual, restringe a ferramenta e verifica citações e valores monetários. A conversa mantém contexto de turnos anteriores; as sessões têm IDs distintos. O projeto não implanta um AgentCore Runtime próprio: usa Harness e uma função inline no cliente.
 
 ## Avaliação

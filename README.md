@@ -1,10 +1,10 @@
-# ContratoClaro
+# ContratoClaro — extensão Gateway + Lambda + Knowledge Base
 
 Assistente educacional para análise de contratos fictícios de prestação de serviços, desenvolvido em Python sobre o ecossistema Amazon Bedrock. O projeto demonstra construção de agente, memória multi-turno, recuperação de cláusulas com RAG, avaliações automatizadas, Red Team e mitigação de falhas.
 
 O ContratoClaro identifica obrigações, pagamentos, prazos, multas, rescisão e diferenças entre versões de um contrato. As respostas citam os trechos recuperados e distinguem o conteúdo contratual de uma conclusão jurídica. **O sistema é um protótipo acadêmico e não fornece parecer jurídico.**
 
-> Esta branch contém a versão v5, usada nas avaliações oficiais. A extensão opcional que executa a ferramenta inteiramente na AWS está na branch `feature/gateway-lambda-kb`.
+> Esta branch contém a extensão v6. Ela preserva a versão v5 usada nas avaliações oficiais e acrescenta uma ferramenta executada inteiramente na AWS por AgentCore Gateway, Lambda e Bedrock Knowledge Base.
 
 ## O que o projeto demonstra
 
@@ -19,28 +19,27 @@ O ContratoClaro identifica obrigações, pagamentos, prazos, multas, rescisão e
 - validações de citações, valores monetários, escopo de documentos e limite de custo;
 - interface Streamlit e artefatos JSONL auditáveis.
 
-## Arquitetura da versão avaliada
+## Arquitetura
 
-O fluxo abaixo representa a v5. No backend Harness, o modelo solicita a função inline `buscar_clausulas`; o cliente Python valida a chamada, consulta a Knowledge Base e devolve os trechos ao Harness. Isso preserva o controle sobre documentos e citações, mas requer que o cliente Python permaneça em execução.
+Na v6, o Harness solicita a ferramenta publicada no Gateway. O Gateway invoca a Lambda, e a Lambda valida os documentos permitidos antes de consultar a Knowledge Base. O cliente inicia a conversa e recebe a resposta, mas não precisa executar `buscar_clausulas` localmente.
 
 ```mermaid
 flowchart LR
     U[Usuário] --> UI[Streamlit ou CLI]
-    UI --> A[Camada do agente Python]
-    A -->|modo local| M[Modelo no Amazon Bedrock]
-    A -->|modo avaliado| H[AgentCore Harness<br/>Gemma 4 31B + memória]
-    H -->|solicita buscar_clausulas| A
-    A --> R[KnowledgeBaseRetriever]
-    R --> KB[Bedrock Knowledge Base]
+    UI --> A[Cliente Python]
+    A --> H[AgentCore Harness<br/>Gemma 4 31B + memória]
+    H --> G[AgentCore Gateway<br/>AWS IAM]
+    G --> L[Lambda buscar_clausulas]
+    L --> KB[Bedrock Knowledge Base]
     KB --> V[S3 Vectors]
     KB --> S3[Contratos fictícios no S3]
-    A --> O[Resposta com citações<br/>e registro JSONL]
+    H --> O[Resposta com citações<br/>e registro JSONL]
     O --> D[DeepEval]
     O --> E[AgentCore Evaluations]
     O --> RT[Red Team]
 ```
 
-Uma descrição técnica mais detalhada, incluindo limites de confiança e fluxo dos dados, está em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md). A metodologia e os números consolidados estão em [`docs/RESULTADOS.md`](docs/RESULTADOS.md). A sessão exploratória está em [`docs/SESSAO-EXPLORATORIA.md`](docs/SESSAO-EXPLORATORIA.md), e a comparação ataque por ataque está em [`docs/RED_TEAM.md`](docs/RED_TEAM.md).
+Uma descrição técnica mais detalhada está em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md), e o guia específico da extensão está em [`docs/GATEWAY-V6.md`](docs/GATEWAY-V6.md). A metodologia e os números consolidados estão em [`docs/RESULTADOS.md`](docs/RESULTADOS.md). A sessão exploratória está em [`docs/SESSAO-EXPLORATORIA.md`](docs/SESSAO-EXPLORATORIA.md), e a comparação ataque por ataque está em [`docs/RED_TEAM.md`](docs/RED_TEAM.md).
 
 ## Resultados principais
 
@@ -58,6 +57,8 @@ Os números abaixo pertencem aos lotes congelados publicados em [`evidence/`](ev
 
 As correções incluíram reforço do prompt contra injeção, validação da ferramenta, recuperação obrigatória antes de alegações contratuais, citações verificáveis, preservação literal de valores e melhor tratamento de perguntas multi-turno. O avaliador customizado não pontuou `gf-01` na baseline porque aquela execução terminou sem resposta completa; por isso o denominador correto é 14, sem atribuir nota inventada ao caso ausente.
 
+Essas métricas pertencem à v5 congelada. A v6 recebeu uma verificação de integração curta: uma chamada direta Lambda → Knowledge Base recuperou dois trechos do documento esperado, e quatro diálogos pelo Harness concluíram sem erro, cobrindo consulta direta, comparação, continuidade e ataque adversarial. A extensão não repetiu toda a campanha paga.
+
 ## Estrutura do repositório
 
 | Caminho | Responsabilidade |
@@ -65,6 +66,8 @@ As correções incluíram reforço do prompt contra injeção, validação da fe
 | `app.py` | Interface Streamlit para upload e conversa com o agente. |
 | `src/contratoclaro/` | Código principal: agente, clientes AWS, RAG, execução de datasets e suporte às avaliações. |
 | `infra/` | Configurações de referência do AgentCore e código do avaliador Lambda. |
+| `infra/lambda_kb_retriever.py` | Lambda que valida a requisição e consulta a Knowledge Base na v6. |
+| `infra/gateway_v6_config.py` | Esquemas e políticas de referência para Gateway, Lambda e Harness v6. |
 | `data/contracts/` | Três contratos sintéticos e seus metadados estáticos para a Knowledge Base. |
 | `data/golden.json` | Quinze casos funcionais: consultas diretas, ferramenta, multi-turno, fora de escopo e adversariais. |
 | `data/red_team.json` | Quinze ataques de prompt injection, jailbreak, vazamento e abuso de ferramenta. |
@@ -89,6 +92,7 @@ As correções incluíram reforço do prompt contra injeção, validação da fe
 | `native_evaluations.py` | Converte execuções do Harness em spans e chama avaliadores nativos on-demand. |
 | `budget.py` | Estima e registra o limite local de custo das execuções. |
 | `cli.py` | Entrada de linha de comando para lotes reproduzíveis. |
+| `gateway_harness.py` | Cliente do Harness v6, cuja ferramenta é executada pelo Gateway. |
 
 ## Requisitos
 
@@ -156,6 +160,10 @@ Crie os recursos na sua própria conta pelo Console AWS ou pelo método de infra
 
 O repositório não cria, altera ou remove esses recursos. Anote o ARN do Harness, o ID da KB e o ID do avaliador criado na sua conta para usá-los nos comandos de teste.
 
+### 3. Configurar a extensão Gateway + Lambda
+
+Para reproduzir a v6, crie uma Lambda com `infra/lambda_kb_retriever.py`, publique-a como target de um AgentCore Gateway protegido por `AWS_IAM` e crie um Harness separado com a ferramenta `agentcore_gateway`. As estruturas revisáveis de ferramenta, catálogo e permissões mínimas estão em `infra/gateway_v6_config.py`; o passo a passo e as limitações estão em [`docs/GATEWAY-V6.md`](docs/GATEWAY-V6.md). O repositório não provisiona esses recursos.
+
 ## Executar a interface
 
 ```powershell
@@ -168,6 +176,8 @@ Envie um ou dois arquivos PDF, TXT ou Markdown, escolha a perspectiva e use a va
 - `AgentCore Harness`: o Harness e a memória rodam na AWS, enquanto a função inline é concluída pelo cliente Python com os arquivos enviados.
 
 A execução oficial com Harness + Knowledge Base é feita pela CLI na seção seguinte. A interface desta branch não envia automaticamente os uploads ao S3.
+
+O smoke específico da v6 usa `infra/smoke_gateway_v6.py` e o ARN do Harness criado pelo usuário. Ele limita a execução a quatro casos definidos em `data/gateway_v6_smoke.json`; consulte [`docs/GATEWAY-V6.md`](docs/GATEWAY-V6.md) antes de fazer chamadas pagas.
 
 ## Executar Golden Dataset e Red Team
 
@@ -242,6 +252,8 @@ Os resultados sanitizados estão em [`custom-evaluator-baseline.jsonl`](evidence
 
 [`evidence/README.md`](evidence/README.md) explica os arquivos publicados. Eles permitem conferir perguntas, respostas, ferramentas, referências e notas sem repetir chamadas pagas. Identificadores da conta, sessões, traces, requisições e caminhos do computador foram removidos; o conteúdo relevante para os resultados foi mantido.
 
+As evidências específicas da extensão estão em `evidence/aws-v6/`: uma resposta direta da Lambda com dois trechos recuperados e o resumo dos quatro diálogos do Harness.
+
 O relatório final está disponível em [`docs/Relatorio_Final_ContratoClaro.docx`](docs/Relatorio_Final_ContratoClaro.docx). O detalhamento da exploração que orientou testes e mitigações está em [`docs/SESSAO-EXPLORATORIA.md`](docs/SESSAO-EXPLORATORIA.md).
 
 ## Encerramento dos recursos
@@ -254,4 +266,4 @@ O ContratoClaro está adequado como prova de conceito educacional: possui execu�
 
 ## Considerações finais
 
-O projeto mostra o ciclo completo de um agente: construção, RAG, deploy, avaliação, ataque, correção e comparação com um baseline. O principal resultado não é apenas a melhora das notas, mas a capacidade de rastrear quais trechos sustentaram cada resposta e quais limitações ainda impedem o uso com dados reais.
+O projeto mostra o ciclo completo de um agente: construção, RAG, deploy, avaliação, ataque, correção e comparação com um baseline. A extensão v6 também demonstra que a mesma recuperação pode ser executada na AWS por Gateway e Lambda. O principal resultado é a capacidade de rastrear quais trechos sustentaram cada resposta e quais limitações ainda impedem o uso com dados reais.

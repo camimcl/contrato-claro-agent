@@ -42,3 +42,7 @@ Depois das mitigações, o v5 resistiu a **15/15** objetivos e entregou **12/15*
    acontece no cliente Python. Embora a documentação atual da AWS informe que invocações do Harness
    emitem traces, a disponibilidade desses traces não foi confirmada naquela rodada. Os avaliadores
    nativos foram executados on-demand com spans reconstruídos, declarando essa limitação.
+
+## Verificação da extensão v6
+
+A v6 não foi usada para recalcular as métricas oficiais. Seu objetivo foi comprovar a execução da ferramenta na AWS. Uma chamada direta à Lambda recuperou dois trechos de `contrato_v1.md`, e quatro diálogos pelo Harness concluíram sem erro: consulta direta, comparação entre versões, continuação multi-turno e tentativa adversarial. Os resumos sanitizados estão em `evidence/aws-v6/`, e os limites dessa verificação estão em `docs/GATEWAY-V6.md`.

@@ -6,6 +6,8 @@ pytest-cache-files-*/
 .ruff_cache/
 *.egg-info/
 .worktrees/
+.superpowers/
+.tmp/
 tmp/
 .env
 .env.*
@@ -26,6 +28,7 @@ docs/*
 !docs/RESULTADOS.md
 !docs/RED_TEAM.md
 !docs/SESSAO-EXPLORATORIA.md
+!docs/GATEWAY-V6.md
 !docs/Relatorio_Final_ContratoClaro.docx
 data/golden_behavior_pilot.json
 data/golden_multiturn_retest.json

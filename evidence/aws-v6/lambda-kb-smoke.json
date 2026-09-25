@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-09-24T02:23:45.873422+00:00",
+  "statusCode": 200,
+  "functionError": null,
+  "resultCount": 2,
+  "references": [
+    "contrato_v1.md",
+    "contrato_v1.md"
+  ],
+  "documentIds": [
+    "1dcfdd549efd",
+    "1dcfdd549efd"
+  ],
+  "error": null,
+  "latencyMs": 4994.67
+}
